@@ -1,6 +1,8 @@
 #include "entrada/LeitorArquivo.hpp"
 #include "pipeline/ConstrutorAFND.hpp"
 #include "pipeline/Determinizador.hpp"
+#include "pipeline/Minimizador.hpp"
+#include "pipeline/TotalizadorErro.hpp"
 #include "saida/ExibidorTabela.hpp"
 
 #include <exception>
@@ -33,6 +35,16 @@ int main(int argc, char* argv[]) {
         Determinizador determinizador;
         AutomatoFinito afd = determinizador.determinizar(afnd);
         exibidor.exibir("ETAPA 3: AUTOMATO FINITO DETERMINISTICO (AFD)", afd);
+
+        // Etapa 4: Minimização (Remoção de Estados Inalcançáveis e Mortos)
+        Minimizador minimizador;
+        AutomatoFinito afdMinimizado = minimizador.minimizar(afd);
+        exibidor.exibir("ETAPA 4: AFD MINIMIZADO (SEM INALCANCAVEIS E MORTOS)", afdMinimizado);
+
+        // Etapa 5: Totalização (Inclusão do Estado de Erro)
+        TotalizadorErro totalizador;
+        AutomatoFinito afdFinal = totalizador.totalizar(afdMinimizado);
+        exibidor.exibir("ETAPA 5: AFD FINAL TOTALIZADO (COM ESTADO DE ERRO)", afdFinal);
 
     } catch (const std::exception& erro) {
         std::cerr << "\n[ERRO] " << erro.what() << "\n";
