@@ -40,6 +40,8 @@ g++ -std=c++17 -Wall -Wextra src/*.cpp src/*/*.cpp -o gerador_afd.exe; if ($?) {
 g++ -std=c++17 -Wall -Wextra src/*.cpp src/*/*.cpp -o gerador_afd.exe
 ```
 
+g++ -std=c++17 -Wall -Wextra src/main.cpp src/modelo/AutomatoFinito.cpp src/entrada/LeitorArquivo.cpp src/pipeline/ConstrutorAFND.cpp src/pipeline/Determinizador.cpp src/pipeline/Minimizador.cpp src/pipeline/TotalizadorErro.cpp src/saida/ExibidorTabela.cpp -o gerador_afd.exe
+
 **Executar passando um arquivo de entrada específico:**
 ```powershell
 .\gerador_afd.exe entradas/meu_teste.txt
